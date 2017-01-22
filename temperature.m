@@ -1,7 +1,7 @@
 function [ T ] = temperature( Z )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-T = 8*Z;
+% This is an unfinished function. It will calculate the temperature profile
+% of the U.S. Standard Atmosphere from mean sea level to 11 km geometric
+% height.
 
 end
 
