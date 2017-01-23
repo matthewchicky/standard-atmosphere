@@ -1,10 +1,10 @@
 function [ Z ] = elevation( p )
 %% Function Description & Creation Info
-%   This function calculates the geometric height (elevation) in kilometers given local
+%   This function calculates the geometric height (altitude) in kilometers given local
 %   atmospheric pressure, in Pascals. The formulation is based on the U.S. Standard 
 %   Atmosphere, 1976. The function is limited to atmospheric pressures between 
 %   101325.0 Pa and 22632.41 Pa, corresponding to a geopotential altitude
-%   range of 0 km to 11 km.
+%   range of 0 km' to 11 km'.
 
 %   U.S. Standard Atmosphere, 1976:
 %   <https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770009539.pdf>
@@ -13,7 +13,7 @@ function [ Z ] = elevation( p )
 %   <http://www.pdas.com/geopot.pdf>
 
 %   Created by:     Matthew Chicky
-%   Last Modified:  1/13/17, 19:56:49 EST
+%   Last Modified:  1/22/17, 18:52:17 EST
 
 %% Variable Description
 %   p:          local atmospheric pressure, in Pa
@@ -33,7 +33,7 @@ function [ Z ] = elevation( p )
 %   Z:          geometric height above mean sea level, in km
 
 %% Variable Declaration
-p0 = 103067.056;          % Pa
+p0 = 101325;            % Pa
 T0 = 288.15;            % K
 M0 = 28.9644;           % kg/kmol
 g0_prime = 9.80655;     % m^2/(s^2*m')
@@ -44,7 +44,7 @@ r0 = 6356.766;          % km
 
 %% Compute Geopotential Height & Geometric Elevation
 H = T0 / ( L0 * (p/p0)^(R*L0/(g0_prime*M0)) ) - T0/L0 + H0;     % km'
-Z = r0*H / (r0-H);                                              % km
+Z = r0*H / (r0 - H);                                            % km
 
 end
 
