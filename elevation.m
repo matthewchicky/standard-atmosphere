@@ -33,7 +33,7 @@ function [ Z ] = elevation( p )
 %   Z:          geometric height above mean sea level, in km
 
 %% Variable Declaration
-p0 = 103840;            % Pa
+p0 = 101325;            % Pa
 T0 = 288.15;            % K
 M0 = 28.9644;           % kg/kmol
 g0_prime = 9.80655;     % m^2/(s^2*m')

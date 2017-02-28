@@ -31,7 +31,7 @@ H0 = 0;                 % km'
 r0 = 6356.766;          % km
 
 %% Compute Geopotential Height & Temperature
-H = r0*Z / (r0 + Z);                                            % km'
-T = T0 + L0*(H - H0);                                           % K
+H = r0.*Z ./ (r0 + Z);                                            % km'
+T = T0 + L0.*(H - H0);                                           % K
 
 end

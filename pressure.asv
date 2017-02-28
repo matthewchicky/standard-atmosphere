@@ -1,7 +1,7 @@
 function [ p ] = pressure( Z )
 %% Function Description & Creation Info
 %   This function calculates the atmospheric pressure in Pascals given elevation (AKA 
-%   geometric height) in kilometers. The formulation is based on the U.S. Standard 
+%   geometric height) in meters. The formulation is based on the U.S. Standard 
 %   Atmosphere, 1976. The function is limited to atmospheric pressures between 
 %   101325.0 Pa and 22632.41 Pa, corresponding to a geopotential altitude
 %   range of 0 km' to 11 km'.
@@ -13,7 +13,7 @@ function [ p ] = pressure( Z )
 %   <http://www.pdas.com/geopot.pdf>
 
 %   Created by:     Matthew Chicky
-%   Last Modified:  2/27/17, 19:54:30 EST
+%   Last Modified:  2/10/17, 15:27:30 EST
 
 %% Variable Description
 %   p:          local atmospheric pressure, in Pa
@@ -33,7 +33,7 @@ function [ p ] = pressure( Z )
 %   Z:          geometric height above mean sea level, in km
 
 %% Variable Declaration
-p0 = 117268;            % Pa        Equivalent sea level pressure in Truth or Consequences, NM
+p0 = 101325;            % Pa
 T0 = 288.15;            % K
 M0 = 28.9644;           % kg/kmol
 g0_prime = 9.80655;     % m^2/(s^2*m')
@@ -43,8 +43,9 @@ H0 = 0;                 % km'
 r0 = 6356.766;          % km
 
 %% Compute Geopotential Height & Pressure
-H = r0*Z ./ (r0 - Z);                                            % km'
-p = p0 * (T0 ./ (L0*(H-H0) + T0)).^(g0_prime*M0/(R*L0));          % Pa
+H = r0*Z / (r0 - Z);                                            % km'
+p = p0 * (T0 / (L0*(H-H0) + T0))^(g0_prime*M0/(R*L0));          
+H = T0 / ( L0 * (p/p0)^(R*L0/(g0_prime*M0)) ) - T0/L0 + H0;     % km'
 
 end
 
